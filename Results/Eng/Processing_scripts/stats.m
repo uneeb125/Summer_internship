@@ -1,16 +1,15 @@
 clc;
 clear;
 
-runsnumber  = 30;
-probsnumber = 13;
+runsnumber  = 25;
+probsnumber = 1;
 
 merged_basedir = fullfile('..','Merged');
 processed_basedir = fullfile('..','Processed');
 
 probset = 'eng';
 
-% algo = ['CO'; 'WGA'; 'BWO'; 'BSLO'; 'GAO'; 'GOA'; 'DCS'; 'MPA'; 'AHA'; 'AO'; 'WSO'; 'SNS'];
-algo = ['CO'; 'WGA'; 'BWO'; 'BSLO'; 'GAO'; 'GOA'; 'DCS'; 'MPA'; 'AHA'; 'WSO'; 'SNS'];
+algo = ['CO'; 'WGA'; 'BWO'; 'BSLO'; 'GAO'; 'GOA'; 'DCS'; 'MPA'; 'AHA'; 'AO'; 'WSO'; 'SNS'];
 
 typef = ['fit'; 'nfe'];
 
@@ -20,9 +19,9 @@ finalfit = zeros(runsnumber,probsnumber);
 finalnfe = zeros(runsnumber,probsnumber);
 
 for algonum = 1:size(algo,1)
-    filename = strcat(probset,sep,algo(algonum,:),sep,typef(1,:),'.csv'); 
-    importfile = fullfile(merged_basedir,filename);
-    temp = csvread(importfile);
+    importfile = strcat(probset,sep,algo(algonum,:),sep,typef(1,:),'.csv'); 
+    importpath = fullfile(merged_basedir,importfile);
+    temp = csvread(importpath);
     % data(:,:,algonum) = temp;
     % means(algonum,:) = mean(data(:,:,algonum))
     means(algonum,:) = mean(temp);

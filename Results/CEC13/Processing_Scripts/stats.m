@@ -1,8 +1,11 @@
 clc;
 clear;
 
-runsnumber  = 30;
-probsnumber = 15;
+runsnumber  = 25;
+probsnumber = 1;
+
+merged_basedir = fullfile('..','Merged');
+processed_basedir = fullfile('..','Processed');
 
 probset = 'cec13';
 
@@ -17,7 +20,8 @@ finalnfe = zeros(runsnumber,probsnumber);
 
 for algonum = 1:size(algo,1)
     importfile = strcat(probset,sep,algo(algonum,:),sep,typef(1,:),'.csv'); 
-    temp = csvread(importfile);
+    importpath = fullfile(merged_basedir,importfile);
+    temp = csvread(importpath);
     % data(:,:,algonum) = temp;
     % means(algonum,:) = mean(data(:,:,algonum))
     means(algonum,:) = mean(temp);
@@ -26,8 +30,8 @@ for algonum = 1:size(algo,1)
     worsts(algonum,:) = max(temp);
 end
 
-csvwrite('means.csv',means); 
-csvwrite('stdevs.csv',stdevs); 
-csvwrite('bests.csv',bests); 
-csvwrite('worsts.csv',worsts); 
+csvwrite(fullfile(processed_basedir,'means.csv'),means); 
+csvwrite(fullfile(processed_basedir,'stdevs.csv'),stdevs); 
+csvwrite(fullfile(processed_basedir,'bests.csv'),bests); 
+csvwrite(fullfile(processed_basedir,'worsts.csv'),worsts); 
 
