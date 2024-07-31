@@ -27,7 +27,9 @@
 %                 https://doi.org/10.1109/ACCESS.2021.3091495
 % ======================================================================= %
 
-function BestData = SNS(fnum, run,nPop, MaxEval,lb,ub,nD,fobj,e2s,glomin)
+function BestData = SNS(fnum, run,nPop, MaxEval,lb,ub,nD,fobj,e2s,glomin,log_interval)
+
+    curve = inf;
 % run Information
 global initial_flag;
 initial_flag=0;
@@ -126,11 +128,12 @@ for Iter = 1:MaxIter
         break
     end
 
-    if mod(Iter,1000)==0
+    if mod(Iter,log_interval)==0
         disp(['Func = ' num2str(fnum) ', run = ' num2str(run) ', Iter = ' num2str(Iter) ', Best Fitness = ' num2str(zBest)]);
+        curve = [curve zBest];
     end
 
 end
 BestData.nfe = neval;
 BestData.cost = zBest;
-end
+Bestdata.curve = curve;

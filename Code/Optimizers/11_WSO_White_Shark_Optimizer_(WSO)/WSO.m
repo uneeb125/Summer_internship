@@ -15,7 +15,9 @@
 %   Knowledge-Based Systems
 %   DOI: https://doi.org/10.1016/j.knosys.2022.108457
 
-function Bestdata=WSO(fnum,run,nPop,MaxEval,lb,ub,nD,fobj,e2s,glomin)
+function Bestdata=WSO(fnum,run,nPop,MaxEval,lb,ub,nD,fobj,e2s,glomin,log_interval)
+
+    curve = inf;
 
 global initial_flag;
 initial_flag = 0;
@@ -151,8 +153,9 @@ for ite=1:Maxiter
     end
     
     %% Obtain the results
-    if mod(ite,1000)==0
+    if mod(ite,log_interval)==0
         disp(['Func = ' num2str(fnum) ', Run = ' num2str(run) ', Iter = ' num2str(ite) ', Best Fitness = ' num2str(fmin0)]);
+        curve = [curve fmin0];
     end
     
     if abs(fmin0-glomin)< e2s
@@ -173,3 +176,4 @@ for ite=1:Maxiter
 end
 Bestdata.cost=fmin0;
 Bestdata.nfe = (ite*nPop);
+Bestdata.curve = curve;

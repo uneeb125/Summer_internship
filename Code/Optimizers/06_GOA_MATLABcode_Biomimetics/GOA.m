@@ -4,7 +4,9 @@
 
 
 
-function Bestdata=GOA(fnum,run,Npop,MaxEval,lb,ub,nD,fobj,e2s,glomin)
+function Bestdata=GOA(fnum,run,Npop,MaxEval,lb,ub,nD,fobj,e2s,glomin,log_interval)
+
+    curve = inf;
 
 global initial_flag;
 initial_flag = 0;
@@ -86,8 +88,9 @@ for t=1:Maxiter
     end % END for i=1:Npop
     
     %% END Phase 2: exploitation (local search)
-    if mod(t,1000)==0
+    if mod(t,log_interval)==0
         disp(['Func = ' num2str(fnum) ', Run = ' num2str(run) ', Iter = ' num2str(t) ', Best Fitness = ' num2str(fbest)]);
+        curve = [curve fbest];
     end
 
     if abs(fbest-glomin)<e2s 
@@ -100,5 +103,5 @@ Bestdata.cost=fbest;
 Bestdata.nfe=t*(Npop);
 Best_pos=Xbest;
 GOA_curve(t)=fbest;
-end
 
+Bestdata.curve = curve;

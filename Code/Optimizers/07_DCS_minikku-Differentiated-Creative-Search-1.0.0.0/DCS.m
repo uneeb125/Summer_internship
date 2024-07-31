@@ -7,7 +7,9 @@
 % to Address Complex Optimization Problems". (Accepted for publication in Expert Systems with Applications)
 % =============================================================================================================================================================================
 
-function Bestdata = DCS(fnum,run,Npop,MaxEval,lb,ub,nD,fobj,e2s,glomin)
+function Bestdata = DCS(fnum,run,Npop,MaxEval,lb,ub,nD,fobj,e2s,glomin,log_interval)
+
+    curve = inf;
 
     global initial_flag;
     initial_flag = 0;
@@ -152,8 +154,9 @@ while nfe < MaxEval
     cul_solution = [cul_solution best_x];
     cul_nfe = [cul_nfe nfe];
 
-    if mod(itr,1000)==0
+    if mod(itr,log_interval)==0
         disp(['Func = ' num2str(fnum) ', Run = ' num2str(run) ', Iter = ' num2str(itr) ', Best Fitness = ' num2str(best_fitness)]);
+        curve = [curve best_fitness];
     end
 
     if abs(best_fitness-glomin)<e2s 
@@ -208,3 +211,4 @@ xu = repmat(lu(2, :), NP, 1);
 pos = vi > xu;
 vi(pos) = (pop(pos) + xu(pos)) / 2;
 end
+Bestdata.curve = curve;

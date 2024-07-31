@@ -5,7 +5,9 @@
 %%% Designed and Developed by Mohammad Dehghani %%%
 
 
-function Bestdata=GAO(fnum,run,Npop,MaxEval,lb,ub,nD,fitness,e2s,glomin)
+function Bestdata=GAO(fnum,run,Npop,MaxEval,lb,ub,nD,fitness,e2s,glomin,log_interval)
+
+    curve = inf;
 
 global initial_flag;
 initial_flag = 0;
@@ -90,8 +92,9 @@ for t=1:Maxiter  % algorithm iteration
     best_so_far(t)=fbest;
     average(t) = mean (fit);
     
-    if mod(t,1000)==0
+    if mod(t,log_interval)==0
         disp(['Func = ' num2str(fnum) ', Run = ' num2str(run) ', Iter = ' num2str(t) ', Best Fitness = ' num2str(fbest)]);
+        curve = [curve fbest];
     end
 
     if abs(fbest-glomin)<e2s 
@@ -102,3 +105,4 @@ Bestdata.cost=fbest;
 Bestdata.nfe = (t*Npop);
 
 
+Bestdata.curve = curve;

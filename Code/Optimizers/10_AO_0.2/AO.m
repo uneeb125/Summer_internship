@@ -16,7 +16,9 @@
 % Aquila Optimizer: A novel meta-heuristic optimization algorithm.
 % Computers & Industrial Engineering.
 %_______________________________________________________________________________________%
-function Bestdata=AO(fnum,run,nPop,MaxEval,lb,ub,nD,fobj,e2s,glomin)
+function Bestdata=AO(fnum,run,nPop,MaxEval,lb,ub,nD,fobj,e2s,glomin,log_interval)
+
+    curve = inf;
 
 
 global initial_flag;
@@ -105,8 +107,9 @@ while t<Maxiter+1
         end
     end
     %-------------------------------------------------------------------------------------
-    if mod(t,1000)==0
+    if mod(t,log_interval)==0
         disp(['Func = ' num2str(fnum) ', Run = ' num2str(run) ', Iter = ' num2str(t) ', Best Fitness = ' num2str(Best_FF)]);
+        curve = [curve Best_FF];
     end
     conv(t)=Best_FF;
     t=t+1;
@@ -129,3 +132,4 @@ o=step;
 end
 
 
+Bestdata.curve = curve;

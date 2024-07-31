@@ -15,7 +15,9 @@
 %           gandomi@uts.edu.au               (Amir H Gandomi)
 %_________________________________________________________________________
 
-function Bestdata=MPA(fnum,run,nPop,MaxEval,lb,ub,nD,fobj,e2s,glomin)
+function Bestdata=MPA(fnum,run,nPop,MaxEval,lb,ub,nD,fobj,e2s,glomin,log_interval)
+
+    curve = inf;
 
 
    global initial_flag;
@@ -151,8 +153,9 @@ while Iter<Maxiter
   Iter=Iter+1;  
   Convergence_curve(Iter)=Top_predator_fit; 
 
-    if mod(Iter,1000)==0
+    if mod(Iter,log_interval)==0
       disp(['Func = ' num2str(fnum) ', Run = ' num2str(run) ', Iter = ' num2str(Iter) ', Best Fitness = ' num2str(Top_predator_fit)]);
+      curve = [curve Top_predator_fit];
    end
    
    if abs(Top_predator_fit-glomin)<e2s 
@@ -163,3 +166,4 @@ end
 Bestdata.cost=Top_predator_fit;
 Bestdata.nfe = (Iter*nPop);
 
+Bestdata.curve = curve;

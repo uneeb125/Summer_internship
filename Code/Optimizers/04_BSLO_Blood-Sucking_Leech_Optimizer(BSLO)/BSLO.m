@@ -12,7 +12,9 @@
 %  paper: Jianfu Bai, H. Nguyen-Xuan, Elena Atroshchenko, Gregor Kosec, Lihua Wang, Magd Abdel Wahab, Blood-sucking leech optimizer[J]. Advances in Engineering Software, 2024, 195: 103696.
 %  doi.org/10.1016/j.advengsoft.2024.103696 
 %____________________________________________________________________________________
-function Bestdata=BSLO(fnum,run,Npop,MaxEval,lb,ub,dim,fobj,e2s,glomin)
+function Bestdata=BSLO(fnum,run,Npop,MaxEval,lb,ub,dim,fobj,e2s,glomin,log_interval)
+
+    curve = inf;
 
 global initial_flag;
 initial_flag = 0;
@@ -134,8 +136,9 @@ while t<Max_iter
     end
     t=t+1;     
     Convergence_curve(t)=Leeches_best_score;  
-    if mod(t,1000)==0
+    if mod(t,log_interval)==0
         disp(['Func = ' num2str(fnum) ', Run = ' num2str(run) ', Iter = ' num2str(t) ', Best Fitness = ' num2str(Leeches_best_score)]);
+        curve = [curve Leeches_best_score];
     end
 
     if abs(Leeches_best_score-glomin)<e2s 
@@ -146,3 +149,4 @@ end
 
 Bestdata.cost = Leeches_best_score;
 Bestdata.nfe = (t*Npop);
+Bestdata.curve = curve;
