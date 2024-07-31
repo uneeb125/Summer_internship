@@ -35,7 +35,7 @@ for Prob2Run = 1:1
     algorithm = str2func(algo);
 
     for fnum= Prob2Run
-        parfor run = 1:nRun
+        for run = 1:nRun
             fobj = @(x) minEnergyRouting(targets,x); 
             data(fnum,run)=feval(algorithm, fnum,run,nPop,MaxEval,1,xArea,nD,fobj,e2s,0);
             % disp(['Best Fitness = ' num2str(data(fnum,run).cost)]);

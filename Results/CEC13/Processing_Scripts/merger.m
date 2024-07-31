@@ -2,15 +2,15 @@ clc;
 clear;
 
 runsnumber  = 25;
-probsnumber = 1;
+probsnumber = 15;
 
 raw_basedir = fullfile('..','Raw_data');
 merged_basedir = fullfile('..','Merged');
 
 probset = 'cec13';
 
-% algo = ['CO'; 'WGA'; 'BWO'; 'BSLO'; 'GAO'; 'GOA'; 'DCS'; 'MPA'; 'AHA'; 'AO'; 'WSO'; 'SNS'];
-algo = ['CO'; 'WGA'; 'BWO'; 'BSLO'; 'GAO'; 'GOA'; 'DCS'; 'MPA'; 'AHA'; 'WSO'; 'SNS'];
+algo = ['CO'; 'WGA'; 'BWO'; 'BSLO'; 'GAO'; 'GOA'; 'DCS'; 'MPA'; 'AHA'; 'AO'; 'WSO'; 'SNS'];
+% algo = ['CO'; 'WGA'; 'BWO'; 'BSLO'; 'GAO'; 'GOA'; 'DCS'; 'MPA'; 'AHA'; 'WSO'; 'SNS'];
 
 
 typef = ['fit'; 'nfe'];

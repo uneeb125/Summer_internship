@@ -1,6 +1,9 @@
 
 
-function Bestdata = WGA(Prob, Run, nPop, MaxNFE, lb,ub,nD, fobj, e2s,glomin)
+function Bestdata = WGA(Prob, Run, nPop, MaxNFE, lb,ub,nD, fobj, e2s,glomin,log_interval)
+
+    curve = inf;
+    
     global initial_flag;
     initial_flag = 0;
     nPop_Initial=nPop;
@@ -122,12 +125,13 @@ function Bestdata = WGA(Prob, Run, nPop, MaxNFE, lb,ub,nD, fobj, e2s,glomin)
         end
 
 
-        if (mod(NFE,50000)==0)
+        if (mod(NFE,log_interval)==0)
             disp(['Func = ' num2str(Prob) ', Run = ' num2str(Run) ', Iter = ' num2str(NFE) ', Best Fitness = ' num2str(Gbest.Cost)]);
+            curve = [curve Gbest.Cost];
         end
 
     end
     Bestdata.cost = Gbest.Cost;
     Bestdata.nfe = NFE-nPop;
 
-end
+Bestdata.curve = curve;

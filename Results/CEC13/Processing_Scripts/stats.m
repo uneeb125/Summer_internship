@@ -2,7 +2,7 @@ clc;
 clear;
 
 runsnumber  = 25;
-probsnumber = 1;
+probsnumber = 15;
 
 merged_basedir = fullfile('..','Merged');
 processed_basedir = fullfile('..','Processed');

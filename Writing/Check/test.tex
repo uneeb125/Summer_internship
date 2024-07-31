@@ -1,0 +1,71 @@
+\documentclass[twocolumn]{elsarticle}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{Title of Your Research Paper}
+
+\author[inst1]{Your Name}
+\author[inst2]{Co-author Name}
+\affiliation[inst1]{organization={Your Institution}, addressline={Address Line}, city={City}, postcode={Postal Code}, country={Country}}
+\affiliation[inst2]{organization={Co-author Institution}, addressline={Address Line}, city={City}, postcode={Postal Code}, country={Country}}
+
+\begin{abstract}
+    The abstract should briefly summarize the key points of the paper, including the problem, your approach, and main results.
+\end{abstract}
+
+\begin{keyword}
+    Keywords \sep Should \sep Be \sep Listed \sep Here
+\end{keyword}
+
+\end{frontmatter}
+
+\section{Introduction}
+\label{sec:intro}
+Introduce the problem, its importance, and the current state of the art. Mention the gaps in the existing literature and how your proposed algorithm addresses these gaps.
+
+\section{Related Work}
+\label{sec:related}
+Review the literature on related algorithms and techniques. Highlight the strengths and weaknesses of each and set the stage for your contribution.
+
+\section{Proposed Algorithm}
+\label{sec:algorithm}
+Describe your algorithm in detail. Include pseudo-code, flowcharts, or any other illustrations that help explain the algorithm.
+
+\subsection{Algorithm Description}
+Provide a step-by-step description of your algorithm.
+
+\subsection{Complexity Analysis}
+Analyze the time and space complexity of your algorithm.
+
+\section{Experimental Setup}
+\label{sec:setup}
+Describe the experimental setup, including the datasets used (e.g., CEC13 and Engineering problem set), the evaluation metrics, and the computational environment.
+
+\section{Results and Discussion}
+\label{sec:results}
+Present the results of your experiments. Use tables and figures to compare the performance of your algorithm with the 10 previous algorithms.
+
+\subsection{Benchmark Functions}
+Discuss the performance on CEC13 benchmark functions.
+
+\subsection{Engineering Problem Set}
+Discuss the performance on the Engineering problem set.
+
+\subsection{Comparison with Other Algorithms}
+Compare your results with those of 10 previous algorithms. Highlight where your algorithm excels and where it might need improvement.
+
+\section{Conclusion}
+\label{sec:conclusion}
+Summarize the key findings of your research. Discuss the implications of your results and suggest possible directions for future work.
+
+\section*{References}
+\bibliographystyle{elsarticle-num}
+\bibliography{your-bibliography-file}
+
+\end{document}

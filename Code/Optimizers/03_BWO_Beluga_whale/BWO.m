@@ -1,4 +1,7 @@
-function Bestdata = BWO(fnum,run,Npop,MaxEval,lb,ub,nD,fobj,e2s,glomin)
+
+function Bestdata = BWO(fnum,run,Npop,MaxEval,lb,ub,nD,fobj,e2s,glomin,log_interval)
+
+    curve = inf;
 
 % disp('Beluga Whale Optimization is optimizing your problem');
 global initial_flag;
@@ -102,8 +105,9 @@ while T <= Max_it
     kk_Record(T) = kk(1);
     Curve(T) = fvalbest;
     T = T+1;
-    if mod(T,1000)==0
+    if mod(T,log_interval)==0
         disp(['Func = ' num2str(fnum) ', Run = ' num2str(run) ', Iter = ' num2str(T) ', Best Fitness = ' num2str(fvalbest)]);
+        curve = [curve fvalbest];
     end
 
     if abs(fvalbest-glomin)<e2s 
@@ -115,3 +119,4 @@ end
 Bestdata.cost = fvalbest;
 Bestdata.nfe = (T*Npop)-Npop;
 % display(['The function call is ', num2str(Counts_run)]);
+Bestdata.curve = curve;
