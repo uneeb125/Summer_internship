@@ -16,8 +16,8 @@ for fnum = 1
     nRun = 2;                      % Number of runs
     nPop = 30;                      % Population size
     e2s = 1e-5;                     % Erorr to stop
-    MaxEval=3e5;        % Maximum NFEs for each problem
-    log_interval = 1e3;
+    MaxEval=3e6;        % Maximum NFEs for each problem
+    log_interval = 2e3;
     fit = nan(nRun,size(fnum,2));
     nfe = nan(nRun,size(fnum,2));
 

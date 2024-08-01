@@ -1,7 +1,7 @@
 clc
 clear
 close all
-for fnum = 1
+for fnum = 1:13
     global initial_flag;
     initial_flag=0;
 
@@ -12,10 +12,10 @@ for fnum = 1
     algo = algo{1}{1};
     probset = 'eng';
 
-    nRun = 2;                      % Number of runs
+    nRun = 30;                      % Number of runs
     nPop = 30;                      % Population size
     e2s = 1e-5;                     % Erorr to stop
-    MaxEval=6e2;        % Maximum NFEs for each problem
+    MaxEval=6e4;        % Maximum NFEs for each problem
     log_interval = 1;
     fit = nan(nRun,size(fnum,2));
     nfe = nan(nRun,size(fnum,2));
@@ -31,7 +31,7 @@ for fnum = 1
     algorithm = str2func(algo);
     best_curve = inf;
 
-        for run = 1:nRun
+        parfor run = 1:nRun
             [lb,ub,nD,vio,glomin,obj]= eng_params(fnum);
             fobj = @(x) eng_bench(x,vio,obj); 
             data(fnum,run)=feval(algorithm,fnum,run,nPop,MaxEval,lb,ub,nD,fobj,e2s,glomin,log_interval);
