@@ -16,7 +16,7 @@ for fnum = 1:15
     nRun = 25;                      % Number of runs
     nPop = 30;                      % Population size
     e2s = 1e-5;                     % Erorr to stop
-    MaxEval=3e4;        % Maximum NFEs for each problem
+    MaxEval=3e6;        % Maximum NFEs for each problem
     log_interval = 2e2;
     fit = nan(nRun,size(fnum,2));
     nfe = nan(nRun,size(fnum,2));
@@ -40,7 +40,7 @@ for fnum = 1:15
             % disp(['Best Fitness = ' num2str(data(fnum,run).cost)]);
         end
         
-        for run =1:nRun 
+        parfor run =1:nRun 
             fit(run,fnum) = data(fnum,run).cost;
             nfe(run,fnum) = data(fnum,run).nfe;
             if data(fnum,run).curve(end)<best_curve
