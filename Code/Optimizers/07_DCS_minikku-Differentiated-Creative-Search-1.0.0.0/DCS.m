@@ -10,6 +10,7 @@
 function Bestdata = DCS(fnum,run,Npop,MaxEval,lb,ub,nD,fobj,e2s,glomin,log_interval)
 
     curve = inf;
+    curve_it = 0;
 
     global initial_flag;
     initial_flag = 0;
@@ -27,8 +28,10 @@ rng(sum(100*clock));
 % Parameters
 NP = Npop;
 D = nD;
-L = repmat(lb,1,nD);
-U = repmat(ub,1,nD);
+% L = repmat(lb,1,nD);
+% U = repmat(ub,1,nD);
+L = lb; 
+U = ub;
 next_pos = zeros(NP,D);
 new_pos = zeros(NP,D);
 max_itr = round(MaxEval/NP);
@@ -153,10 +156,11 @@ while nfe < MaxEval
 
     cul_solution = [cul_solution best_x];
     cul_nfe = [cul_nfe nfe];
-
-    if mod(itr,log_interval)==0
-        disp(['Func = ' num2str(fnum) ', Run = ' num2str(run) ', Iter = ' num2str(itr) ', Best Fitness = ' num2str(best_fitness)]);
+    iter_t = nfe/Npop;
+    if mod(iter_t,log_interval)==0
+        disp(['Func = ' num2str(fnum) ', Run = ' num2str(run) ', Iter = ' num2str(iter_t) ', Best Fitness = ' num2str(best_fitness)]);
         curve = [curve best_fitness];
+        curve_it = [curve_it iter_t];
     end
 
     if abs(best_fitness-glomin)<e2s 
@@ -166,6 +170,8 @@ while nfe < MaxEval
 end
 Bestdata.cost=best_fitness;
 Bestdata.nfe = (itr*Npop)-Npop;
+Bestdata.curve = curve;
+Bestdata.curve_it = curve_it;
 
 
 
@@ -211,4 +217,3 @@ xu = repmat(lu(2, :), NP, 1);
 pos = vi > xu;
 vi(pos) = (pop(pos) + xu(pos)) / 2;
 end
-Bestdata.curve = curve;

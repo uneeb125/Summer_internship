@@ -15,6 +15,7 @@
 function Bestdata=BSLO(fnum,run,Npop,MaxEval,lb,ub,dim,fobj,e2s,glomin,log_interval)
 
     curve = inf;
+    curve_it = 0;
 
 global initial_flag;
 initial_flag = 0;
@@ -139,6 +140,7 @@ while t<Max_iter
     if mod(t,log_interval)==0
         disp(['Func = ' num2str(fnum) ', Run = ' num2str(run) ', Iter = ' num2str(t) ', Best Fitness = ' num2str(Leeches_best_score)]);
         curve = [curve Leeches_best_score];
+        curve_it = [curve_it t];
     end
 
     if abs(Leeches_best_score-glomin)<e2s 
@@ -150,3 +152,4 @@ end
 Bestdata.cost = Leeches_best_score;
 Bestdata.nfe = (t*Npop);
 Bestdata.curve = curve;
+Bestdata.curve_it = curve_it;

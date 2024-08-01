@@ -18,6 +18,7 @@
 function Bestdata=MPA(fnum,run,nPop,MaxEval,lb,ub,nD,fobj,e2s,glomin,log_interval)
 
     curve = inf;
+    curve_it = 0;
 
 
    global initial_flag;
@@ -156,6 +157,7 @@ while Iter<Maxiter
     if mod(Iter,log_interval)==0
       disp(['Func = ' num2str(fnum) ', Run = ' num2str(run) ', Iter = ' num2str(Iter) ', Best Fitness = ' num2str(Top_predator_fit)]);
       curve = [curve Top_predator_fit];
+      curve_it = [curve_it Iter];
    end
    
    if abs(Top_predator_fit-glomin)<e2s 
@@ -167,3 +169,4 @@ Bestdata.cost=Top_predator_fit;
 Bestdata.nfe = (Iter*nPop);
 
 Bestdata.curve = curve;
+Bestdata.curve_it = curve_it;

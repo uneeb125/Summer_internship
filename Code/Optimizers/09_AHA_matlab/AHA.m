@@ -2,6 +2,7 @@
 function Bestdata=AHA(fnum,run, Npop, MaxEval,lb,ub,Dim,fobj,e2s,glomin,log_interval)
 
     curve = inf;
+    curve_it = 0;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % fnum: The index of function.                    %
 % MaxIt: The maximum number of iterations.            %
@@ -126,6 +127,7 @@ MaxIt = MaxEval/Npop;
         if mod(It,log_interval)==0
             disp(['Func = ' num2str(fnum) ', Run = ' num2str(run) ', Iter = ' num2str(It) ', Best Fitness = ' num2str(BestF)]);
             curve = [curve BestF];
+            curve_it = [curve_it It];
         end
     
         if abs(BestF-glomin)<e2s 
@@ -137,3 +139,4 @@ Bestdata.cost=BestF;
 Bestdata.nfe = (It*Npop);
 
 Bestdata.curve = curve;
+Bestdata.curve_it = curve_it;

@@ -19,6 +19,7 @@
 function Bestdata=AO(fnum,run,nPop,MaxEval,lb,ub,nD,fobj,e2s,glomin,log_interval)
 
     curve = inf;
+    curve_it = 0;
 
 
 global initial_flag;
@@ -110,6 +111,7 @@ while t<Maxiter+1
     if mod(t,log_interval)==0
         disp(['Func = ' num2str(fnum) ', Run = ' num2str(run) ', Iter = ' num2str(t) ', Best Fitness = ' num2str(Best_FF)]);
         curve = [curve Best_FF];
+        curve_it = [curve_it t];
     end
     conv(t)=Best_FF;
     t=t+1;
@@ -122,6 +124,8 @@ end
 Bestdata.cost=Best_FF;
 Bestdata.nfe = (t*nPop)-nPop;
 
+Bestdata.curve = curve;
+Bestdata.curve_it = curve_it;
 
 end
 function o=Levy(d)
@@ -132,4 +136,3 @@ o=step;
 end
 
 
-Bestdata.curve = curve;

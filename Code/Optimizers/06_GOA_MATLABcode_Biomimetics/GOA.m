@@ -7,6 +7,7 @@
 function Bestdata=GOA(fnum,run,Npop,MaxEval,lb,ub,nD,fobj,e2s,glomin,log_interval)
 
     curve = inf;
+    curve_it = 0;
 
 global initial_flag;
 initial_flag = 0;
@@ -91,6 +92,7 @@ for t=1:Maxiter
     if mod(t,log_interval)==0
         disp(['Func = ' num2str(fnum) ', Run = ' num2str(run) ', Iter = ' num2str(t) ', Best Fitness = ' num2str(fbest)]);
         curve = [curve fbest];
+        curve_it = [curve_it t];
     end
 
     if abs(fbest-glomin)<e2s 
@@ -105,3 +107,4 @@ Best_pos=Xbest;
 GOA_curve(t)=fbest;
 
 Bestdata.curve = curve;
+Bestdata.curve_it = curve_it;

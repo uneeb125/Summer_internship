@@ -18,6 +18,7 @@
 function Bestdata=WSO(fnum,run,nPop,MaxEval,lb,ub,nD,fobj,e2s,glomin,log_interval)
 
     curve = inf;
+    curve_it = 0;
 
 global initial_flag;
 initial_flag = 0;
@@ -156,6 +157,7 @@ for ite=1:Maxiter
     if mod(ite,log_interval)==0
         disp(['Func = ' num2str(fnum) ', Run = ' num2str(run) ', Iter = ' num2str(ite) ', Best Fitness = ' num2str(fmin0)]);
         curve = [curve fmin0];
+        curve_it = [curve_it ite];
     end
     
     if abs(fmin0-glomin)< e2s
@@ -177,3 +179,4 @@ end
 Bestdata.cost=fmin0;
 Bestdata.nfe = (ite*nPop);
 Bestdata.curve = curve;
+Bestdata.curve_it = curve_it;
