@@ -1,3 +1,4 @@
+
 clc
 clear
 close all
@@ -5,18 +6,18 @@ for fnum = 1
     global initial_flag;
     initial_flag=0;
 
-    addpath(genpath(fullfile("..","..","Tests","Eng")));
+    addpath(genpath(fullfile("..","..","Tests","CEC13")));
     cpwd = pwd;
     rg_algo = '.*[\/\\][^_]*_([^_]*)';
     algo = (regexp(cpwd,rg_algo,'tokens'));
     algo = algo{1}{1};
-    probset = 'eng';
+    probset = 'cec13';
 
     nRun = 2;                      % Number of runs
     nPop = 30;                      % Population size
     e2s = 1e-5;                     % Erorr to stop
-    MaxEval=6e2;        % Maximum NFEs for each problem
-    log_interval = 1;
+    MaxEval=3e5;        % Maximum NFEs for each problem
+    log_interval = 1e3;
     fit = nan(nRun,size(fnum,2));
     nfe = nan(nRun,size(fnum,2));
 
@@ -30,10 +31,11 @@ for fnum = 1
     writematrix(initcsv,curvesave);
     algorithm = str2func(algo);
     best_curve = inf;
+    glomin = 0;
 
         for run = 1:nRun
-            [lb,ub,nD,vio,glomin,obj]= eng_params(fnum);
-            fobj = @(x) eng_bench(x,vio,obj); 
+            [lb,ub,nD]=cec13_params(fnum);
+            fobj = @(x) cec13_benchmark_func(x,fnum); 
             data(fnum,run)=feval(algorithm,fnum,run,nPop,MaxEval,lb,ub,nD,fobj,e2s,glomin,log_interval);
             % disp(['Best Fitness = ' num2str(data(fnum,run).cost)]);
         end
@@ -56,4 +58,3 @@ for fnum = 1
 
     plot(data(fnum,run).curve_it,data(fnum,run).curve);
 end
-

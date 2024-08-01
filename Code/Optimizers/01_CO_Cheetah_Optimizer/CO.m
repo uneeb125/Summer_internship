@@ -180,12 +180,12 @@ function Bestdata = CO(fnum,run,nPop,MaxEval,lb,ub,nD,fobj,e2s,glomin,log_interv
         end
         BestCost(t)=BestSol.Cost;
         Globest(1,t)=X_best.Cost;
-        
+       iter=FEs/nPop; 
         %% Display
-        if mod(FEs,log_interval)==0
-            disp(['Func = ' num2str(fnum) ', Run = ' num2str(run) ', Iter = ' num2str(FEs) ', Best Fitness = ' num2str(Globest(end))]);
+        if mod(iter,log_interval)==0
+            disp(['Func = ' num2str(fnum) ', Run = ' num2str(run) ', Iter = ' num2str(iter) ', Best Fitness = ' num2str(Globest(end))]);
             curve = [curve Globest(end)];
-            curve_it = [curve_it FEs];
+            curve_it = [curve_it iter];
         end
 
         if abs(Globest(end)-glomin)<e2s
@@ -195,6 +195,6 @@ function Bestdata = CO(fnum,run,nPop,MaxEval,lb,ub,nD,fobj,e2s,glomin,log_interv
     end
 
 Bestdata.cost=Globest(end);
-Bestdata.nfe = it; 
+Bestdata.nfe = FEs; 
 Bestdata.curve = curve;
 Bestdata.curve_it = curve_it;

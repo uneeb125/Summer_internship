@@ -121,9 +121,6 @@ function Bestdata = WGA(Prob, Run, nPop, MaxNFE, lb,ub,nD, fobj, e2s,glomin,log_
         nfe(iter)=NFE;
         BestCosts(iter)=Gbest.Cost;
 
-        if abs(Gbest.Cost-glomin) < e2s 
-            break;
-        end
 
         itera = NFE/30;
         if (mod(itera,log_interval)==0)
@@ -132,6 +129,9 @@ function Bestdata = WGA(Prob, Run, nPop, MaxNFE, lb,ub,nD, fobj, e2s,glomin,log_
             curve_it = [curve_it itera];
         end
 
+        if abs(Gbest.Cost-glomin) < e2s 
+            break;
+        end
     end
     Bestdata.cost = Gbest.Cost;
     Bestdata.nfe = NFE-nPop;
