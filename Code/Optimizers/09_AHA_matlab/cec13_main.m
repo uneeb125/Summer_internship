@@ -2,7 +2,7 @@
 clc
 clear
 close all
-for fnum = 1
+for fnum = 1:15
     global initial_flag;
     initial_flag=0;
 
@@ -13,11 +13,11 @@ for fnum = 1
     algo = algo{1}{1};
     probset = 'cec13';
 
-    nRun = 2;                      % Number of runs
+    nRun = 25;                      % Number of runs
     nPop = 30;                      % Population size
     e2s = 1e-5;                     % Erorr to stop
-    MaxEval=3e6;        % Maximum NFEs for each problem
-    log_interval = 2e3;
+    MaxEval=3e4;        % Maximum NFEs for each problem
+    log_interval = 2e2;
     fit = nan(nRun,size(fnum,2));
     nfe = nan(nRun,size(fnum,2));
 
@@ -33,7 +33,7 @@ for fnum = 1
     best_curve = inf;
     glomin = 0;
 
-        for run = 1:nRun
+        parfor run = 1:nRun
             [lb,ub,nD]=cec13_params(fnum);
             fobj = @(x) cec13_benchmark_func(x,fnum); 
             data(fnum,run)=feval(algorithm,fnum,run,nPop,MaxEval,lb,ub,nD,fobj,e2s,glomin,log_interval);
