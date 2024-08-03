@@ -40,7 +40,7 @@ for fnum = 1:15
             % disp(['Best Fitness = ' num2str(data(fnum,run).cost)]);
         end
         
-        parfor run =1:nRun 
+        for run =1:nRun 
             fit(run,fnum) = data(fnum,run).cost;
             nfe(run,fnum) = data(fnum,run).nfe;
             if data(fnum,run).curve(end)<best_curve

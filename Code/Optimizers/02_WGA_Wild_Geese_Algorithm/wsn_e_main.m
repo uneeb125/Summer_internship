@@ -1,7 +1,8 @@
+
 clc
 clear
 close all
-for fnum = 2
+for fnum = 1
     global initial_flag;
     initial_flag=0;
 
@@ -20,6 +21,7 @@ for fnum = 2
     xArea = 100;             % Length and width of world
     Area = xArea *xArea;     %Area of the world
     target = 32;
+    nD = 50;
     log_interval = 2e0;
     fit = nan(nRun,size(fnum,2));
     nfe = nan(nRun,size(fnum,2));
@@ -38,12 +40,11 @@ for fnum = 2
 
         parfor run = 1:nRun
             fobj = @(x) minEnergyRouting(targets,x); 
-            fobj = @(x) cec13_benchmark_func(x,fnum); 
             data(fnum,run)=feval(algorithm,fnum,run,nPop,MaxEval,1,xArea,nD,fobj,e2s,glomin,log_interval);
             % disp(['Best Fitness = ' num2str(data(fnum,run).cost)]);
         end
         
-        parfor run =1:nRun 
+        for run =1:nRun 
             fit(run,fnum) = data(fnum,run).cost;
             nfe(run,fnum) = data(fnum,run).nfe;
             if data(fnum,run).curve(end)<best_curve
