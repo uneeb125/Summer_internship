@@ -12,7 +12,7 @@ function Bestdata=GOA(fnum,run,Npop,MaxEval,lb,ub,nD,fobj,e2s,glomin,log_interva
 global initial_flag;
 initial_flag = 0;
 
-Maxiter = MaxEval/Npop;
+Maxiter = floor(MaxEval/Npop);
 
 
 

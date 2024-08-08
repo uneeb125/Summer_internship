@@ -13,7 +13,7 @@ function Bestdata=GAO(fnum,run,Npop,MaxEval,lb,ub,nD,fitness,e2s,glomin,log_inte
 global initial_flag;
 initial_flag = 0;
 
-Maxiter = MaxEval/Npop;
+Maxiter = floor(MaxEval/Npop);
 
 
 lb=ones(1,nD).*(lb);                              % Lower limit for variables

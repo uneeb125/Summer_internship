@@ -23,7 +23,7 @@ function Bestdata=WSO(fnum,run,nPop,MaxEval,lb,ub,nD,fobj,e2s,glomin,log_interva
 global initial_flag;
 initial_flag = 0;
 
-Maxiter = MaxEval/nPop;
+Maxiter = floor(MaxEval/nPop);
 
 %% Convergence curve
 ccurve=zeros(1,Maxiter);

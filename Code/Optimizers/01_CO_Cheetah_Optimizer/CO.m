@@ -25,7 +25,7 @@ function Bestdata = CO(fnum,run,nPop,MaxEval,lb,ub,nD,fobj,e2s,glomin,log_interv
     global initial_flag;
     initial_flag = 0;
     
-    Maxiter = MaxEval/nPop;
+    Maxiter = floor(MaxEval/nPop);
 
     if length(lb) == 1 
         ub = ub.*ones(1,nD);   % Lower Bound of Decision Variables

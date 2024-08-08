@@ -8,7 +8,7 @@ function Bestdata = BWO(fnum,run,Npop,MaxEval,lb,ub,nD,fobj,e2s,glomin,log_inter
 global initial_flag;
 initial_flag = 0;
 
-Max_it = MaxEval/Npop;
+Max_it = floor(MaxEval/Npop);
 
 fit = inf*ones(Npop,1);
 newfit = fit;

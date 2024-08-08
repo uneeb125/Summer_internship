@@ -20,7 +20,7 @@ function Bestdata=BSLO(fnum,run,Npop,MaxEval,lb,ub,dim,fobj,e2s,glomin,log_inter
 global initial_flag;
 initial_flag = 0;
 
-Max_iter = MaxEval/Npop;
+Max_iter = floor(MaxEval/Npop);
 
 %% initialize best Leeches
 Leeches_best_pos=zeros(1,dim);

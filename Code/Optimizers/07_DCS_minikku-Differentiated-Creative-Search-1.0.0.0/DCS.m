@@ -15,7 +15,7 @@ function Bestdata = DCS(fnum,run,Npop,MaxEval,lb,ub,nD,fobj,e2s,glomin,log_inter
     global initial_flag;
     initial_flag = 0;
     
-    Maxiter = MaxEval/Npop;
+    Maxiter = floor(MaxEval/Npop);
 
 
 %disp('DCS is now tackling your problem');

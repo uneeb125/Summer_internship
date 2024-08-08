@@ -21,7 +21,7 @@ function Bestdata=AHA(fnum,run, Npop, MaxEval,lb,ub,Dim,fobj,e2s,glomin,log_inte
 global initial_flag;
 initial_flag = 0;
 
-MaxIt = MaxEval/Npop;
+MaxIt = floor(MaxEval/Npop);
 
     PopPos=zeros(Npop,Dim);
     PopFit=zeros(1,Npop);

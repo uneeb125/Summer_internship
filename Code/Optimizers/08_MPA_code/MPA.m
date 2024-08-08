@@ -24,7 +24,7 @@ function Bestdata=MPA(fnum,run,nPop,MaxEval,lb,ub,nD,fobj,e2s,glomin,log_interva
    global initial_flag;
    initial_flag = 0;
    
-   Maxiter = MaxEval/nPop;
+   Maxiter = floor(MaxEval/nPop);
 
 
 Top_predator_pos=zeros(1,nD);

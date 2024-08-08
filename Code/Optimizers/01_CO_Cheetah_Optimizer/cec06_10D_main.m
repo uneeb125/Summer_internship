@@ -2,7 +2,7 @@
 clc
 clear
 close all
-for fnum = 1:28
+for fnum = 7
     global initial_flag;
     initial_flag=0;
 
@@ -17,7 +17,7 @@ for fnum = 1:28
     nPop = 30;                      % Population size
     nD = 10;
     e2s = 1e-5;                     % Erorr to stop
-    MaxEval=(2e4)*nD;        % Maximum NFEs for each problem
+    MaxEval=(2e2)*nD;        % Maximum NFEs for each problem
     log_interval = 1e0;
     fit = nan(nRun,size(fnum,2));
     nfe = nan(nRun,size(fnum,2));
@@ -33,8 +33,8 @@ for fnum = 1:28
     algorithm = str2func(algo);
     best_curve = inf;
     glomin = 0;
-    viofactor = 1e20;
-        parfor run = 1:nRun
+    viofactor = 10e20;
+        for run = 1:nRun
             [lb,ub]=cec17_params(fnum);
             fobj = @(x) cec17_funcs(x,fnum);
             vobj = @(x) cec17_bench(x,viofactor,fobj); 

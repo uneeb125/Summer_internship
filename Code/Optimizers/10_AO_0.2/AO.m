@@ -25,7 +25,7 @@ function Bestdata=AO(fnum,run,nPop,MaxEval,lb,ub,nD,fobj,e2s,glomin,log_interval
 global initial_flag;
 initial_flag = 0;
 
-Maxiter = MaxEval/nPop;
+Maxiter = floor(MaxEval/nPop);
 
 Best_P=zeros(1,nD);
 Best_FF=inf;
