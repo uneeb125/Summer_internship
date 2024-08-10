@@ -32,7 +32,7 @@ for fnum = 1:28
     writematrix(initcsv,curvesave);
     algorithm = str2func(algo);
     best_curve = inf;
-    glomin = 0;
+    glomin = -inf;
     viofactor = 1e20;
         parfor run = 1:nRun
             [lb,ub]=cec17_params(fnum);
