@@ -7,7 +7,7 @@ probsnumber = 15;
 merged_basedir = fullfile('..','Merged');
 processed_basedir = fullfile('..','Processed');
 
-probset = 'cec13';
+probset = 'cec06';
 
 algo = ['CO'; 'WGA'; 'BWO'; 'BSLO'; 'GAO'; 'GOA'; 'DCS'; 'MPA'; 'AHA'; 'AO'; 'WSO'; 'SNS'];
 
@@ -24,10 +24,10 @@ for algonum = 1:size(algo,1)
     temp = csvread(importpath);
     % data(:,:,algonum) = temp;
     % means(algonum,:) = mean(data(:,:,algonum))
-    means(algonum,:) = mean(temp);
-    stdevs(algonum,:) = std(temp);
-    bests(algonum,:) = min(temp);
-    worsts(algonum,:) = max(temp);
+    means(algonum,:) = real(mean(temp));
+    stdevs(algonum,:) = real(std(temp));
+    bests(algonum,:) = real(min(temp));
+    worsts(algonum,:) = real(max(temp));
 end
 
 csvwrite(fullfile(processed_basedir,'means.csv'),means); 
