@@ -107,17 +107,17 @@ while t<Max_iter
                 L3=abs(Prey_Position(j)-Leeches_Positions(i,j))*PD*(1-r3*k2(i,j)/Npop);
                 L4=abs(Prey_Position(j)-Leeches_Positions(i,k(i,j)))*PD*(1-r3*k2(i,j)/Npop);
                 if rand()<a
-                if abs(Prey_Position(j))>abs(Leeches_Positions(i,j))
-                Leeches_Positions(i,j)=Prey_Position(j)+W1*Prey_Position(j)-L3;
+                    if abs(Prey_Position(j))>abs(Leeches_Positions(i,j))
+                        Leeches_Positions(i,j)=Prey_Position(j)+W1*Prey_Position(j)-L3;
+                    else
+                        Leeches_Positions(i,j)=Prey_Position(j)+W1*Prey_Position(j)+L3;
+                    end
                 else
-                Leeches_Positions(i,j)=Prey_Position(j)+W1*Prey_Position(j)+L3;
-                end
-                else
-                 if abs(Prey_Position(j))>abs(Leeches_Positions(i,j))
-                Leeches_Positions(i,j)=Prey_Position(j)+W1*Prey_Position(j)-L4;
-                else
-                Leeches_Positions(i,j)=Prey_Position(j)+W1*Prey_Position(j)+L4;
-                end                   
+                     if abs(Prey_Position(j))>abs(Leeches_Positions(i,j))
+                        Leeches_Positions(i,j)=Prey_Position(j)+W1*Prey_Position(j)-L4;
+                    else
+                        Leeches_Positions(i,j)=Prey_Position(j)+W1*Prey_Position(j)+L4;
+                    end                   
                 end
             end
         end
