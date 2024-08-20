@@ -7,7 +7,7 @@ yIndex = 2:2:length(pop);
 
 sumCircles = union(pop(xIndex) , pop(yIndex), Rsensor);
 
-Coverage = sumCircles/Area;
+Coverage = -(sumCircles/Area);
 
 
 

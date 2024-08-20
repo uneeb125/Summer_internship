@@ -44,11 +44,11 @@ for fnum = 1
         end
         
         for run =1:nRun 
-            fit(run,fnum) = data(fnum,run).cost;
+            fit(run,fnum) = -(data(fnum,run).cost);
             nfe(run,fnum) = data(fnum,run).nfe;
             if data(fnum,run).curve(end)<best_curve
                 writematrix(initcsv,curvesave);
-                dlmwrite(curvesave,data(fnum,run).curve,'delimiter',',','-append');
+                dlmwrite(curvesave,-(data(fnum,run).curve),'delimiter',',','-append');
                 dlmwrite(curvesave,data(fnum,run).curve_it,'delimiter',',','-append');
                 best_curve = data(fnum,run).curve(end);
             end
@@ -59,7 +59,7 @@ for fnum = 1
         
         initial_flag=0;
 
-    plot(data(fnum,run).curve_it,data(fnum,run).curve);
+    plot(data(fnum,run).curve_it,-(data(fnum,run).curve));
 end
 
 

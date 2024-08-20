@@ -2,7 +2,7 @@
 clc
 clear
 close all
-for fnum = 1
+for fnum = 1:28
     global initial_flag;
     initial_flag=0;
 
@@ -13,7 +13,7 @@ for fnum = 1
     algo = algo{1}{1};
     probset = 'cec17_30D';
 
-    nRun = 2;                      % Number of runs
+    nRun = 25;                      % Number of runs
     nPop = 30;                      % Population size
     nD = 30;
     e2s = 1e-5;                     % Erorr to stop

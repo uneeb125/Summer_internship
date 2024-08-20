@@ -2,7 +2,7 @@
 clc
 clear
 close all
-for fnum = 1:28
+for fnum = 1
     global initial_flag;
     initial_flag=0;
 
@@ -13,7 +13,7 @@ for fnum = 1:28
     algo = algo{1}{1};
     probset = 'cec17_30D';
 
-    nRun = 25;                      % Number of runs
+    nRun = 2;                      % Number of runs
     nPop = 30;                      % Population size
     nD = 30;
     e2s = 1e-5;                     % Erorr to stop
@@ -34,7 +34,7 @@ for fnum = 1:28
     best_curve = inf;
     glomin = -inf;
     viofactor = 1e20;
-        parfor run = 1:nRun
+        for run = 1:nRun
             [lb,ub]=cec17_params(fnum);
             fobj = @(x) cec17_funcs(x,fnum);
             vobj = @(x) cec17_bench(x,viofactor,fobj); 

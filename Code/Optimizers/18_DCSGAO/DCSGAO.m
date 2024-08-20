@@ -7,7 +7,7 @@
 % to Address Complex Optimization Problems". (Accepted for publication in Expert Systems with Applications)
 % =============================================================================================================================================================================
 
-function Bestdata = DCS(fnum,run,Npop,MaxEval,lb,ub,nD,fobj,e2s,glomin,log_interval)
+function Bestdata = DCSGAO(fnum,run,Npop,MaxEval,lb,ub,nD,fobj,e2s,glomin,log_interval)
 
     curve = inf;
     curve_it = 0;
@@ -73,10 +73,70 @@ itr = 1;
 pc = 0.5;
 
 % Best solution
-best_fitness = min(fitness);
+[best_fitness, best_pos_id] = min(fitness);
+
+best_pos = pos(best_pos_id,:);
 
 % Ranking-based self-improvement
 phi_qKR = 0.25 + 0.55 * ((0 + ((1:NP)/NP)) .^ 0.5);
+
+
+for t=1:10  % algorithm iteration
+    %%
+    for i=1:Npop
+        %%
+
+            %% Phase 1: Attack on termite mounds (exploration phase)
+            TM_location=find(fitness<fitness(i));% based on Eq(4)
+            if size (TM_location,2)==0
+                STM=best_pos;
+            else
+                K=randperm(  size (TM_location,2)  ,1);
+                STM=pos(K,:);
+            end
+            I=round(1+rand);
+            X_new_P1=pos( i,: ) + rand(1,1).* ( STM - I.*pos( i,: ) ) ;%Eq(5)
+            X_new_P1 = max(X_new_P1,lb);X_new_P1 = min(X_new_P1,ub);
+            
+            % update position based on Eq (6)
+            L=X_new_P1;
+            fit_new_P1=fobj(L);
+            if fit_new_P1<fitness(i)
+                pos(i,:) = X_new_P1;
+                fitness(i) = fit_new_P1;
+            end
+            %% End Phase 1
+
+            %% Phase 2: Digging in termite mounds (exploitation phase)
+            X_new_P2=pos(i,:)+ (1-2*rand).*(ub-lb)./t; % Eq(7)
+            X_new_P2= max(X_new_P2,lb/t);X_new_P2 = min(X_new_P2,ub/t);
+            
+            % Updating X_i using (8)
+            L=X_new_P2;
+            f_new = fobj(L);
+            if f_new <= fitness (i)
+                pos(i,:) = X_new_P2;
+                fitness (i)=f_new;
+                if f_new<best_fitness
+                    best_pos=X_new_P2;
+                    best_fitness=f_new;
+                end
+            end
+            %%
+        %%
+        
+    end % for i=1:Npop
+    %%
+    
+    nfe = nfe + Npop; 
+    
+    if mod(t,log_interval)==0
+        disp(best_pos)
+        disp(['Func = ' num2str(fnum) ', Run = ' num2str(run) ', Iter = ' num2str(t) ', Best Fitness = ' num2str(best_fitness)]);
+        curve = [curve best_fitness];
+        curve_it = [curve_it t];
+    end
+end
 
 while nfe < MaxEval
 

@@ -2,7 +2,7 @@
 clc
 clear
 close all
-for fnum = 1
+for fnum = 1:28
     global initial_flag;
     initial_flag=0;
 
@@ -11,14 +11,14 @@ for fnum = 1
     rg_algo = '.*[\/\\][^_]*_([^_]*)';
     algo = (regexp(cpwd,rg_algo,'tokens'));
     algo = algo{1}{1};
-    probset = 'cec17_30D';
+    probset = 'cec17_50D';
 
-    nRun = 2;                      % Number of runs
+    nRun = 25;                      % Number of runs
     nPop = 30;                      % Population size
-    nD = 30;
+    nD = 50;
     e2s = 1e-5;                     % Erorr to stop
     MaxEval=(2e4)*nD;        % Maximum NFEs for each problem
-    log_interval = 2e0;
+    log_interval = 2e1;
     fit = nan(nRun,size(fnum,2));
     nfe = nan(nRun,size(fnum,2));
 
@@ -34,7 +34,7 @@ for fnum = 1
     best_curve = inf;
     glomin = -inf;
     viofactor = 1e20;
-        for run = 1:nRun
+        parfor run = 1:nRun
             [lb,ub]=cec17_params(fnum);
             fobj = @(x) cec17_funcs(x,fnum);
             vobj = @(x) cec17_bench(x,viofactor,fobj); 
