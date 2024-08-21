@@ -1,11 +1,11 @@
-function Coverage = wsn_bench( pop, Rsensor, Area )
+function Coverage = wsn_bench( nodes, Rsensor, Area )
 
 % AUB = A+B - intesect(A,B)
 
-xIndex = 1:2:length(pop);
-yIndex = 2:2:length(pop);
+xIndex = 1:2:length(nodes);
+yIndex = 2:2:length(nodes);
 
-sumCircles = union(pop(xIndex) , pop(yIndex), Rsensor);
+sumCircles = my_union(nodes, Rsensor);
 
 Coverage = -(sumCircles/Area);
 
