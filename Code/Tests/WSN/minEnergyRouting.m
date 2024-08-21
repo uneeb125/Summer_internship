@@ -6,7 +6,7 @@ function [ EnergyConsumption ] = minEnergyRouting( inputNode, nodes )
     
     nodesPosition = ones(3, nNodes);
     
-    x = linspace (1,nNodes, nNodes);
+    x = 1:2:nNodes*2;
     
     y= x+1;
 
