@@ -1,8 +1,11 @@
-function res = union(xc, yc, r)
+function res = union(nodes,r)
  
 %
 % Size of my grid -- higher values => higher accuracy.
 %
+xc = nodes(1:2:length(nodes));
+yc = nodes(2:2:length(nodes));
+
 ngrid = 100;
  
 
